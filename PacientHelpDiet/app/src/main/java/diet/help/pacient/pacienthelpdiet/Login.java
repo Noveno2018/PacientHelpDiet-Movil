@@ -5,9 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,7 +15,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
+
     EditText txt_Email,txt_Password;
     FirebaseAuth.AuthStateListener mAuthListener;
     CardView btn_Login;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         txt_Email=(EditText) findViewById(R.id.txt_email);
         txt_Password=(EditText) findViewById(R.id.txt_password);
         btn_Login=(CardView) findViewById(R.id.btn_login);
@@ -48,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void Login(View view){
-        login(txt_Email.getText().toString(),txt_Password.getText().toString());
-    }
     private void login(String email,String password){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

@@ -20,7 +20,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class PanelNavegacion extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PanelNavegacion extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseAuth.AuthStateListener mAuthListener;
     TextView txt_Email;
@@ -44,14 +45,13 @@ public class PanelNavegacion extends AppCompatActivity implements NavigationView
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         txt_Email = (TextView) header.findViewById(R.id.tv_email);
-
 
         mAuthListener= new FirebaseAuth.AuthStateListener() {
             @Override
@@ -60,7 +60,7 @@ public class PanelNavegacion extends AppCompatActivity implements NavigationView
                 if(user!=null){
                     txt_Email.setText(user.getEmail());
                 }else {
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent=new Intent(getApplicationContext(),Login.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(),"Cerrar",Toast.LENGTH_SHORT).show();
@@ -74,11 +74,8 @@ public class PanelNavegacion extends AppCompatActivity implements NavigationView
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-
         } else {
             super.onBackPressed();
-            FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
-
         }
     }
 
@@ -102,7 +99,6 @@ public class PanelNavegacion extends AppCompatActivity implements NavigationView
         }
 
         return super.onOptionsItemSelected(item);
-
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -123,9 +119,10 @@ public class PanelNavegacion extends AppCompatActivity implements NavigationView
 
         } else if (id == R.id.nav_send) {
 
-        }else if(id==R.id.nav_cerrar){
+        } else if(id==R.id.nav_cerrar){
             FirebaseAuth.getInstance().signOut();
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -144,5 +141,4 @@ public class PanelNavegacion extends AppCompatActivity implements NavigationView
             FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
         }
     }
-
 }

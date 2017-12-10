@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    android:theme="@style/AppTheme"
-    tools:context="diet.help.pacient.pacienthelpdiet.MainActivity">
+    tools:context="diet.help.pacient.pacienthelpdiet.Login">
 
     <ImageView
         android:id="@+id/imageView3"
