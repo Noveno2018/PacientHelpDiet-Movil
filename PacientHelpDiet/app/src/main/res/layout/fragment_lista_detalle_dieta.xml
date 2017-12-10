@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="diet.help.pacient.pacienthelpdiet.ListaDetalleDieta">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="269dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="date"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="34dp" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_search_category_default"
+            tools:layout_editor_absoluteX="320dp"
+            tools:layout_editor_absoluteY="34dp" />
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_menu_send"
+            tools:layout_editor_absoluteX="320dp"
+            tools:layout_editor_absoluteY="512dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="205dp"
+            android:layout_height="27dp"
+            android:text="Dietas Registradas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="101dp" />
+
+        <ListView
+            android:layout_width="344dp"
+            android:layout_height="362dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="138dp" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
