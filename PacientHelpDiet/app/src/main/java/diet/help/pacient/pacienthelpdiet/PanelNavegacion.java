@@ -1,5 +1,6 @@
 package diet.help.pacient.pacienthelpdiet;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -110,9 +111,13 @@ public class PanelNavegacion extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            Intent intent=new Intent(getApplicationContext(),Pruebas.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_slideshow) {
-
+            Intent intent=new Intent(getApplicationContext(),Dietas.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
