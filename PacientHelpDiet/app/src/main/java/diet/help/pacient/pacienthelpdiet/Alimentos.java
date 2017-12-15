@@ -6,15 +6,14 @@ package diet.help.pacient.pacienthelpdiet;
 
 public class Alimentos {
 
-    String img,nombre,tipodieta_key;
+    String img,nombre;
 
     public Alimentos() {
     }
 
-    public Alimentos(String img, String nombre, String tipodieta_key) {
+    public Alimentos(String img, String nombre) {
         this.img = img;
         this.nombre = nombre;
-        this.tipodieta_key = tipodieta_key;
     }
 
     public String getImg() {
@@ -31,13 +30,5 @@ public class Alimentos {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getTipodieta_key() {
-        return tipodieta_key;
-    }
-
-    public void setTipodieta_key(String tipodieta_key) {
-        this.tipodieta_key = tipodieta_key;
     }
 }
