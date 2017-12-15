@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Dietas extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    //prueba commit git krakrn
-    //Janneth
+
     Spinner cmb_Tipos_Dietas;
     RecyclerView rv_aliemntos;
     ArrayList<TipoDietas>tipo;
