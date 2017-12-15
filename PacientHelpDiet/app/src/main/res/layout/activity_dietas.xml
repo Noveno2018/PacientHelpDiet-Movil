@@ -7,30 +7,26 @@
     tools:context="diet.help.pacient.pacienthelpdiet.Dietas">
 
 
-    <Spinner
-        android:id="@+id/sp_tipo_dietas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="13dp" />
-
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Tipos Dietas:" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Alimentos"
-        android:layout_marginTop="70dp"/>
+        android:id="@+id/textView3"
+        android:textAllCaps="true"/>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_listas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="2dp" />
     </android.support.design.widget.CoordinatorLayout>
 
 

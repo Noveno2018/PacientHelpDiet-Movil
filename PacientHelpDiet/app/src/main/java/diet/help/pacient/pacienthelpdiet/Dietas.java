@@ -1,12 +1,16 @@
 package diet.help.pacient.pacienthelpdiet;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -17,62 +21,42 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collection;
 
-public class Dietas extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-
-    Spinner cmb_Tipos_Dietas;
+public class Dietas extends AppCompatActivity {
     RecyclerView rv_aliemntos;
-    ArrayList<TipoDietas>tipo;
-    TipoDietas tipoDieta;
+    ArrayList<Alimentos> alimentos=new ArrayList<Alimentos>();;
+    final static ArrayList<TipoDietas> tipos =new ArrayList<TipoDietas>();;
+    FirebaseDatabase database=FirebaseDatabase.getInstance();
+    final DatabaseReference references=database.getReference(FirebaseReferences.ALIMENTOS_REFERENCIAS);
+    Adaptador adaptador;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dietas);
-        cmb_Tipos_Dietas=(Spinner) findViewById(R.id.sp_tipo_dietas);
-        final FirebaseDatabase database=FirebaseDatabase.getInstance();
-        DatabaseReference references=database.getReference(FirebaseReferences.CATEGORIAS_REFERENCIAS);
+        rv_aliemntos=(RecyclerView) findViewById(R.id.rv_listas);
+        rv_aliemntos.setLayoutManager(new LinearLayoutManager(this));
+        adaptador=new Adaptador(alimentos);
+        rv_aliemntos.setAdapter(adaptador);
+        rv_aliemntos.setHasFixedSize(true);
+        GridLayoutManager layoutManager=new GridLayoutManager(this,3);
+        rv_aliemntos.setLayoutManager(layoutManager);
         references.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterator<DataSnapshot> items=dataSnapshot.getChildren().iterator();
-                while (items.hasNext()){
-                    DataSnapshot item=items.next();
-                    tipoDieta=new TipoDietas(item.child("tipo").getValue().toString(),item.child("descripcion").getValue().toString());
-                    Log.i("Tipos",item.child("tipo").getValue().toString());
-                    Log.i("Tipos",item.child("descripcion").getValue().toString());
-                    Log.i("Tipos5",tipoDieta.getTipo());
-                    Log.i("Tipos6",tipoDieta.getDescripcion());
-
+                alimentos.removeAll(alimentos);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Alimentos ali=ds.getValue(Alimentos.class);
+                    alimentos.add(ali);
                 }
-
+                adaptador.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-    }
 
-    private void ListaTipos(){
-        ArrayList<String> tiposdietas=new ArrayList<String>();
-        for(int i=0;i<tipo.size();i++){
-            tiposdietas.add(tipo.get(i).getTipo());
-        }
-        ArrayAdapter<String> sp_adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tiposdietas);
-        sp_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cmb_Tipos_Dietas.setAdapter(sp_adapter);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(
-                getApplicationContext(),
-                parent.getItemAtPosition(position).toString() + " Seleccionado" ,
-                Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
     }
 }
