@@ -1,6 +1,5 @@
-package diet.help.pacient.pacienthelpdiet;
+package diet.help.pacient.pacienthelpdiet.Vistas;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +19,9 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import diet.help.pacient.pacienthelpdiet.Pruebas;
+import diet.help.pacient.pacienthelpdiet.R;
 
 public class PanelNavegacion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -61,7 +63,7 @@ public class PanelNavegacion extends AppCompatActivity
                 if(user!=null){
                     txt_Email.setText(user.getEmail());
                 }else {
-                    Intent intent=new Intent(getApplicationContext(),Login.class);
+                    Intent intent=new Intent(getApplicationContext(),Login_Activity.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(),"Cerrar",Toast.LENGTH_SHORT).show();
@@ -111,11 +113,9 @@ public class PanelNavegacion extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent intent=new Intent(getApplicationContext(),Pruebas.class);
-            startActivity(intent);
-            finish();
+            
         } else if (id == R.id.nav_slideshow) {
-            Intent intent=new Intent(getApplicationContext(),Dietas.class);
+            Intent intent=new Intent(getApplicationContext(),Dieta_Activity.class);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_manage) {

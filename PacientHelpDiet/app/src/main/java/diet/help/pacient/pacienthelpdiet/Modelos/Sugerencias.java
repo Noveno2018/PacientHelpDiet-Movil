@@ -1,17 +1,17 @@
-package diet.help.pacient.pacienthelpdiet;
+package diet.help.pacient.pacienthelpdiet.Modelos;
 
 /**
  * Created by mauuu on 14/12/2017.
  */
 
-public class Alimentos {
+public class Sugerencias {
 
     String img,nombre;
 
-    public Alimentos() {
+    public Sugerencias() {
     }
 
-    public Alimentos(String img, String nombre) {
+    public Sugerencias(String img, String nombre) {
         this.img = img;
         this.nombre = nombre;
     }
