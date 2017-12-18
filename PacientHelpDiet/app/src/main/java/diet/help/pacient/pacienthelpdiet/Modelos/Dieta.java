@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Dieta {
 
     private String horario,pacienteKey,fecha,observaciones;
-    private ArrayList<Dieta> listadetalledieta;
+    private ArrayList<DetalleDieta> listadetalledieta=new ArrayList<DetalleDieta>();
 
     public Dieta() {
     }
@@ -53,11 +53,11 @@ public class Dieta {
         this.observaciones = observaciones;
     }
 
-    public ArrayList<Dieta> getListadetalledieta() {
+    public ArrayList<DetalleDieta> getListadetalledieta() {
         return listadetalledieta;
     }
 
-    public void setListadetalledieta(ArrayList<Dieta> listadetalledieta) {
+    public void setListadetalledieta(ArrayList<DetalleDieta> listadetalledieta) {
         this.listadetalledieta = listadetalledieta;
     }
 }

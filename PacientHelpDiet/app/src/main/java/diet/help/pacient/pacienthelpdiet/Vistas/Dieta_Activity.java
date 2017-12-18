@@ -15,6 +15,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Sugerencias_Adaptador;
+import diet.help.pacient.pacienthelpdiet.Modelos.DetalleDieta;
+import diet.help.pacient.pacienthelpdiet.Modelos.Dieta;
 import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 import diet.help.pacient.pacienthelpdiet.Modelos.Sugerencias;
 import diet.help.pacient.pacienthelpdiet.Modelos.TipoDietas;
@@ -22,11 +24,13 @@ import diet.help.pacient.pacienthelpdiet.R;
 
 public class Dieta_Activity extends AppCompatActivity {
     RecyclerView rv_aliemntos;
-    ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();;
-    final static ArrayList<TipoDietas> tipos =new ArrayList<TipoDietas>();;
+    ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
+    ArrayList<TipoDietas> tipos =new ArrayList<TipoDietas>();
+    ArrayList<DetalleDieta> detalleDietas=new ArrayList<DetalleDieta>();
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     final DatabaseReference references=database.getReference(FirebaseReferences.ALIMENTOS_REFERENCIAS);
     Sugerencias_Adaptador sugerenciasAdaptador;
+    Dieta dieta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class Dieta_Activity extends AppCompatActivity {
                 }
                 sugerenciasAdaptador.notifyDataSetChanged();
             }
+
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
