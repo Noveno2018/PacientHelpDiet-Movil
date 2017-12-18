@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="diet.help.pacient.pacienthelpdiet.PanelNavegacion"
+    tools:context="diet.help.pacient.pacienthelpdiet.Vistas.PanelNavegacion"
     tools:showIn="@layout/app_bar_panel_navegacion">
 
 </android.support.constraint.ConstraintLayout>

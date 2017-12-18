@@ -1,4 +1,4 @@
-package diet.help.pacient.pacienthelpdiet;
+package diet.help.pacient.pacienthelpdiet.Servicios;
 
 /**
  * Created by mauuu on 12/12/2017.

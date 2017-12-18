@@ -1,4 +1,4 @@
-package diet.help.pacient.pacienthelpdiet;
+package diet.help.pacient.pacienthelpdiet.Vistas;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,7 +15,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Login extends AppCompatActivity {
+import diet.help.pacient.pacienthelpdiet.R;
+
+public class Login_Activity extends AppCompatActivity {
 
     EditText txt_Email,txt_Password;
     FirebaseAuth.AuthStateListener mAuthListener;

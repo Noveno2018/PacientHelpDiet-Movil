@@ -1,4 +1,4 @@
-package diet.help.pacient.pacienthelpdiet;
+package diet.help.pacient.pacienthelpdiet.Adaptadores;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,15 +12,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
+import diet.help.pacient.pacienthelpdiet.Modelos.Sugerencias;
+import diet.help.pacient.pacienthelpdiet.R;
+
 /**
  * Created by mauuu on 14/12/2017.
  */
 
-public class Adaptador extends RecyclerView.Adapter<Adaptador.AlimentoViewHolder>{
+public class Sugerencias_Adaptador extends RecyclerView.Adapter<Sugerencias_Adaptador.AlimentoViewHolder>{
 
-    ArrayList<Alimentos> alimentos;
+    ArrayList<Sugerencias> alimentos;
 
-    public Adaptador(ArrayList<Alimentos> alimentos) {
+    public Sugerencias_Adaptador(ArrayList<Sugerencias> alimentos) {
         this.alimentos = alimentos;
     }
 
@@ -32,7 +35,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.AlimentoViewHolder
 
     @Override
     public void onBindViewHolder(AlimentoViewHolder holder, int position) {
-        Alimentos alimento=alimentos.get(position);
+        Sugerencias alimento=alimentos.get(position);
         Glide.with(holder.itemView.getContext()).load(alimento.getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img);
         holder.nombre.setText(alimento.getNombre());
     }
