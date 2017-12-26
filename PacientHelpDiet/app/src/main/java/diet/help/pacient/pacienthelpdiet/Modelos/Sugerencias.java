@@ -6,7 +6,7 @@ package diet.help.pacient.pacienthelpdiet.Modelos;
 
 public class Sugerencias {
 
-    String img,nombre;
+    String img,nombre,key;
 
     public Sugerencias() {
     }
@@ -16,6 +16,13 @@ public class Sugerencias {
         this.nombre = nombre;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
     public String getImg() {
         return img;
     }
