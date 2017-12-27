@@ -40,15 +40,12 @@ public class Sugerencias_Adaptador extends RecyclerView.Adapter<Sugerencias_Adap
         return new AlimentoViewHolder(v,onSelectElementos);
     }
 
-
-
     @Override
     public void onBindViewHolder(final AlimentoViewHolder holder, final int position) {
         Sugerencias alimento=alimentos.get(position);
         Glide.with(holder.itemView.getContext()).load(alimento.getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img);
         holder.nombre.setText(alimento.getNombre());
     }
-
 
     @Override
     public int getItemCount() {

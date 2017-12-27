@@ -79,7 +79,6 @@ public class ListaSugerencia_Fragment extends Fragment{
             @Override
             public void onAddClick(int posicion) {
                 eventBus.post(new Sugerencias(alimentos.get(posicion).getImg(),alimentos.get(posicion).getNombre(),alimentos.get(posicion).getKey()));
-
                 Toast.makeText(getContext(),"Se agregado "+alimentos.get(posicion).getNombre(),Toast.LENGTH_SHORT).show();
             }
         });

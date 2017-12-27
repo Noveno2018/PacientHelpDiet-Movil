@@ -1,6 +1,7 @@
 package diet.help.pacient.pacienthelpdiet.Adaptadores;
 
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
+import diet.help.pacient.pacienthelpdiet.Interface.OnSelectElementos;
 import diet.help.pacient.pacienthelpdiet.Modelos.Sugerencias;
 import diet.help.pacient.pacienthelpdiet.R;
 
@@ -23,6 +25,11 @@ import diet.help.pacient.pacienthelpdiet.R;
 public class Pedidos_Adaptador extends RecyclerView.Adapter<Pedidos_Adaptador.AlimentoViewHolder>{
 
     ArrayList<Sugerencias> alimentos;
+    private OnSelectElementos onSelectElementos;
+
+    public void setOnSelectElementos(OnSelectElementos onSelectElementos) {
+        this.onSelectElementos = onSelectElementos;
+    }
 
     public Pedidos_Adaptador(ArrayList<Sugerencias> alimentos) {
         this.alimentos = alimentos;
@@ -31,7 +38,7 @@ public class Pedidos_Adaptador extends RecyclerView.Adapter<Pedidos_Adaptador.Al
     @Override
     public Pedidos_Adaptador.AlimentoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.listado_sugerencias,parent,false);
-        return new Pedidos_Adaptador.AlimentoViewHolder(v);
+        return new Pedidos_Adaptador.AlimentoViewHolder(v,onSelectElementos);
     }
 
     @Override
@@ -50,11 +57,21 @@ public class Pedidos_Adaptador extends RecyclerView.Adapter<Pedidos_Adaptador.Al
     public static class AlimentoViewHolder extends RecyclerView.ViewHolder{
         ImageView img;
         TextView nombre;
-        public AlimentoViewHolder(View itemView) {
+        CardView btn_close;
+        public AlimentoViewHolder(View itemView, final OnSelectElementos onSelectElementos) {
             super(itemView);
             img=(ImageView) itemView.findViewById(R.id.ig_img);
-
             nombre=(TextView) itemView.findViewById(R.id.tv_nombre);
+            btn_close=(CardView)itemView.findViewById(R.id.cv_delete);
+            btn_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int posicion=getAdapterPosition();
+                    if(posicion!=RecyclerView.NO_POSITION){
+                        onSelectElementos.onAddClick(posicion);
+                    }
+                }
+            });
         }
     }
 }
