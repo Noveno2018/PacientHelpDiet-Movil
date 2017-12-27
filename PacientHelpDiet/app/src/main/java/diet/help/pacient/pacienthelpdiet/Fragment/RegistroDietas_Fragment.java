@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Pedidos_Adaptador;
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Sugerencias_Adaptador;
+import diet.help.pacient.pacienthelpdiet.Interface.OnSelectElementos;
 import diet.help.pacient.pacienthelpdiet.Modelos.Sugerencias;
 import diet.help.pacient.pacienthelpdiet.R;
 
@@ -53,6 +55,14 @@ public class RegistroDietas_Fragment extends Fragment {
         rv_pedidos.setHasFixedSize(true);
         GridLayoutManager layoutManager=new GridLayoutManager(getContext(),3);
         rv_pedidos.setLayoutManager(layoutManager);
+        pedidos_adaptador.setOnSelectElementos(new OnSelectElementos() {
+            @Override
+            public void onAddClick(int posicion) {
+                Toast.makeText(getContext(),"Se eliminado "+alimentos.get(posicion).getNombre(),Toast.LENGTH_SHORT).show();
+                alimentos.remove(posicion);
+                pedidos_adaptador.notifyDataSetChanged();
+            }
+        });
         return view;
     }
 
