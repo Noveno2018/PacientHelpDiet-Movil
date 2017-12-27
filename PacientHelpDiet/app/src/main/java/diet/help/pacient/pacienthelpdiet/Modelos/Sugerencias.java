@@ -16,6 +16,12 @@ public class Sugerencias {
         this.nombre = nombre;
     }
 
+    public Sugerencias(String img, String nombre, String key) {
+        this.img = img;
+        this.nombre = nombre;
+        this.key = key;
+    }
+
     public String getKey() {
         return key;
     }
