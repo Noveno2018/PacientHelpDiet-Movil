@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Pedidos_Adaptador;
@@ -42,6 +44,8 @@ public class ListaSugerencia_Fragment extends Fragment{
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     final DatabaseReference references=database.getReference(FirebaseReferences.ALIMENTOS_REFERENCIAS);
     Sugerencias_Adaptador sugerenciasAdaptador;
+    RegistroDietas_Fragment registroDietas_fragment=new RegistroDietas_Fragment();
+    private EventBus eventBus=EventBus.getDefault();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,10 +78,9 @@ public class ListaSugerencia_Fragment extends Fragment{
         sugerenciasAdaptador.setOnSelectElementos(new OnSelectElementos() {
             @Override
             public void onAddClick(int posicion) {
-                pedidos.add(alimentos.get(posicion));
-                RegistroDietas_Fragment registroDietas_fragment=new RegistroDietas_Fragment();
-                registroDietas_fragment.setAlimentos(pedidos);
-                Toast.makeText(getContext(),"Se agregado "+alimentos.get(posicion).getKey(),Toast.LENGTH_SHORT).show();
+                eventBus.post(new Sugerencias(alimentos.get(posicion).getImg(),alimentos.get(posicion).getNombre(),alimentos.get(posicion).getKey()));
+
+                Toast.makeText(getContext(),"Se agregado "+alimentos.get(posicion).getNombre(),Toast.LENGTH_SHORT).show();
             }
         });
         return view;

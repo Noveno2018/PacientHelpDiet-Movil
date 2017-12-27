@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Pedidos_Adaptador;
@@ -26,9 +29,15 @@ public class RegistroDietas_Fragment extends Fragment {
     ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
     RecyclerView rv_pedidos;
     Pedidos_Adaptador pedidos_adaptador;
+    private EventBus eventBus=EventBus.getDefault();
 
-    public void setAlimentos(ArrayList<Sugerencias> alimentos) {
-        this.alimentos = alimentos;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            alimentos= (ArrayList<Sugerencias>) getArguments().getSerializable("datos");
+            Log.i("datos",alimentos.toString());
+        }
     }
 
     @Override
@@ -44,10 +53,23 @@ public class RegistroDietas_Fragment extends Fragment {
         rv_pedidos.setHasFixedSize(true);
         GridLayoutManager layoutManager=new GridLayoutManager(getContext(),3);
         rv_pedidos.setLayoutManager(layoutManager);
-
-        pedidos_adaptador.notifyDataSetChanged();
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        eventBus.unregister(this);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        eventBus.register(this);
+    }
+    @Subscribe
+    public void EjecutarComunicacion(Sugerencias sugerencias){
+        alimentos.add(sugerencias);
+        pedidos_adaptador.notifyDataSetChanged();
+    }
 }
