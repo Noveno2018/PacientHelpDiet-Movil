@@ -1,6 +1,7 @@
 package diet.help.pacient.pacienthelpdiet.Modelos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by mauuu on 12/12/2017.
@@ -8,17 +9,18 @@ import java.util.ArrayList;
 
 public class Dieta {
 
-    private String horario,pacienteKey,fecha,observaciones;
-    private ArrayList<DetalleDieta> listadetalledieta=new ArrayList<DetalleDieta>();
+    private String horario,pacienteKey,observaciones,key;
+    private Date fecha;
+    private ArrayList<DetalleDieta> listadetalledieta;
 
     public Dieta() {
     }
 
-    public Dieta(String horario, String pacienteKey, String fecha, String observaciones) {
+    public Dieta(String horario, String pacienteKey, String observaciones, Date fecha) {
         this.horario = horario;
         this.pacienteKey = pacienteKey;
-        this.fecha = fecha;
         this.observaciones = observaciones;
+        this.fecha = fecha;
     }
 
     public String getHorario() {
@@ -37,20 +39,28 @@ public class Dieta {
         this.pacienteKey = pacienteKey;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public ArrayList<DetalleDieta> getListadetalledieta() {
