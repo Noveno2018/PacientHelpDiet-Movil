@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class DetalleDieta {
-    String dietaKey,especificaciones,tipodieta_key;
+    String dietaKey,especificaciones,tipodieta_key,key;
 
 
     public DetalleDieta() {
@@ -17,6 +17,14 @@ public class DetalleDieta {
         this.dietaKey = dietaKey;
         this.especificaciones = especificaciones;
         this.tipodieta_key = tipodieta_key;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getDietaKey() {

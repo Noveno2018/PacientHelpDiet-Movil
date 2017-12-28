@@ -39,7 +39,7 @@ public class PanelNavegacion extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+ //       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 /*
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +116,7 @@ public class PanelNavegacion extends AppCompatActivity
         FragmentManager fragmentManager=getSupportFragmentManager();
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_dietas) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new ContenedorDietas_Fragment()).commit();
         } else if (id == R.id.nav_slideshow) {
             Intent intent=new Intent(getApplicationContext(),Dieta_Activity.class);
