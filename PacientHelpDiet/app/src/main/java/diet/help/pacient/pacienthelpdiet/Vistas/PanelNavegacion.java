@@ -130,6 +130,11 @@ public class PanelNavegacion extends AppCompatActivity
 
         } else if(id==R.id.nav_cerrar){
             FirebaseAuth.getInstance().signOut();
+        }   else if(id==R.id.nav_dietas_consulta){
+            Intent intent=new Intent(getApplicationContext(),Consulta_Dieta_Activity.class);
+            startActivity(intent);
+            finish();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
