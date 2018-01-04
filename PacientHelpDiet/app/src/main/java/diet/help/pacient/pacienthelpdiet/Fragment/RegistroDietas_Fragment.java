@@ -145,7 +145,8 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
                             especificaciones=especificaciones+","+alimentos.get(i).getNombre();
                         }
                     }
-                    DetalleDieta detalleDieta=new DetalleDieta(dieta.getKey(),especificaciones,tipoDieta.get(posiciontipo).getKey());
+                    Log.i("posiciontipo",String.valueOf(posiciontipo));
+                    DetalleDieta detalleDieta=new DetalleDieta(dieta.getKey(),especificaciones,tipoDieta.get(posiciontipo-1).getKey());
                     if(especificaciones!=null){
                         dietasreferences.setValue(dieta1);
                         detallereference.push().setValue(detalleDieta);

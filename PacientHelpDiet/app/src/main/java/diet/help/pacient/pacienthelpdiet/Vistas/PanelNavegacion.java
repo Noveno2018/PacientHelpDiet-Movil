@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import diet.help.pacient.pacienthelpdiet.Fragment.ConsultaDietas_Fragment;
 import diet.help.pacient.pacienthelpdiet.Fragment.ContenedorDietas_Fragment;
 import diet.help.pacient.pacienthelpdiet.Fragment.ListaSugerencia_Fragment;
 import diet.help.pacient.pacienthelpdiet.R;
@@ -124,8 +125,9 @@ public class PanelNavegacion extends AppCompatActivity
             finish();
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
 
+        } else if (id == R.id.nav_dietas_consulta) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new ConsultaDietas_Fragment()).commit();
         } else if (id == R.id.nav_send) {
 
         } else if(id==R.id.nav_cerrar){

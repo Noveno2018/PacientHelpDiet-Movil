@@ -3,7 +3,9 @@
     <string-array name="cmb_horarios">
         <item>---Seleccione---</item>
         <item>Desayuno</item>
+        <item>Colacion 1</item>
         <item>Almuerzo</item>
+        <item>Colacion 2</item>
         <item>Merienda</item>
     </string-array>
 </resources>
