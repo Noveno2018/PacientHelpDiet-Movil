@@ -1,4 +1,4 @@
-package diet.help.pacient.pacienthelpdiet;
+package diet.help.pacient.pacienthelpdiet.Modelos;
 
 import java.util.ArrayList;
 
@@ -13,15 +13,23 @@ public class TipoDietas {
     public TipoDietas() {
     }
 
+    public TipoDietas(String tipo, String descripcion) {
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+    }
+
     public TipoDietas(String tipo, String descripcion, String key) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.key = key;
     }
 
-    public TipoDietas(String tipo, String descripcion) {
-        this.tipo = tipo;
-        this.descripcion = descripcion;
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getTipo() {
@@ -38,13 +46,5 @@ public class TipoDietas {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 }
