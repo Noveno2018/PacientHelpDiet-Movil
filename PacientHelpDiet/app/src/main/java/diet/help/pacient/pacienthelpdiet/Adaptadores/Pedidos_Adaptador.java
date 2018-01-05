@@ -40,8 +40,6 @@ public class Pedidos_Adaptador extends RecyclerView.Adapter<Pedidos_Adaptador.Al
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.listado_sugerencias,parent,false);
         return new Pedidos_Adaptador.AlimentoViewHolder(v,onSelectElementos);
     }
-    //comentario1
-    //comentario2
 
     @Override
     public void onBindViewHolder(Pedidos_Adaptador.AlimentoViewHolder holder, int position) {

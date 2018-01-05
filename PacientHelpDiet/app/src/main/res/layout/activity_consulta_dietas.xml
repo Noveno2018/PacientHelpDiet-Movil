@@ -11,12 +11,10 @@
         android:id="@+id/textFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="158dp"
-        android:layout_toEndOf="@+id/textView8"
-        android:autoText="false"
-        android:text="Fecha Actual"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
+        android:text="Alimentos"
+        android:textAllCaps="true" />
 
     <TextView
         android:id="@+id/textView8"
@@ -31,31 +29,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView8">
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textFecha"
-                android:text="HORARIO " />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textFecha"
-                android:text="DIETA " />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textFecha"
-                android:text="OBSERVACION " />
-
-        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
