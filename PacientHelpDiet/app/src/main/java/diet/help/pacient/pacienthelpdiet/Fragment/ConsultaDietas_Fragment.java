@@ -49,8 +49,7 @@ public class ConsultaDietas_Fragment extends Fragment {
     TextView desayunoResumen;
     TextView almuerzoResumen;
     Dieta dieta;
-
-
+    // pruebas
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,12 +80,7 @@ public class ConsultaDietas_Fragment extends Fragment {
                     TipoDietas det=ds.getValue(TipoDietas.class);
                     catalogoTipoDietas.put(ds.getKey(),det.getTipo());
                 }
-
-
-
             }
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
