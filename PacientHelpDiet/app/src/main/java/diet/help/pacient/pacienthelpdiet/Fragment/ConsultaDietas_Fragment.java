@@ -32,6 +32,7 @@ import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 
 
 public class ConsultaDietas_Fragment extends Fragment {
+    //comentario
 
     RecyclerView rv_aliemntos;
     ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
