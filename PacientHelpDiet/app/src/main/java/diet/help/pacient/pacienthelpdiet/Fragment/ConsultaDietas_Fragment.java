@@ -32,7 +32,6 @@ import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 
 
 public class ConsultaDietas_Fragment extends Fragment {
-    //comentario
 
     RecyclerView rv_aliemntos;
     ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
@@ -50,7 +49,6 @@ public class ConsultaDietas_Fragment extends Fragment {
     TextView desayunoResumen;
     TextView almuerzoResumen;
     Dieta dieta;
-    // pruebas
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
