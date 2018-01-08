@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_action_registro"
             android:title="Registro Dietas" />
         <item
-            android:id="@+id/nav_dietas_consulta"
-            android:icon="@drawable/ic_action_registro"
-            android:title="Consultar Dietas" />
-        <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Slideshow" />
@@ -27,9 +23,9 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_dietas_consulta"
+                android:icon="@drawable/ic_action_registro"
+                android:title="Consultar Dietas" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

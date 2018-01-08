@@ -49,13 +49,13 @@ public class ContenedorDietas_Fragment extends Fragment {
             super(fragmentManager);
         }
 
-        String [] titulotabs={"Añadir Sugerencias","Crear Registro"};
+        String [] titulotabs={"Crear Registro","Añadir Sugerencias"};
 
         @Override
         public Fragment getItem(int position) {
             switch (position){
-                case 0:return new ListaSugerencia_Fragment();
-                case 1:return new RegistroDietas_Fragment();
+                case 0:return new RegistroDietas_Fragment();
+                case 1:return new ListaSugerencia_Fragment();
             }
             return null;
         }

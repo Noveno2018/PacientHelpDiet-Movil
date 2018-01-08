@@ -1,10 +1,13 @@
-package diet.help.pacient.pacienthelpdiet.Vistas;
+package diet.help.pacient.pacienthelpdiet.Fragment;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +30,9 @@ import diet.help.pacient.pacienthelpdiet.Modelos.TipoDietas;
 import diet.help.pacient.pacienthelpdiet.R;
 import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 
-public class Consulta_Dieta_Activity extends AppCompatActivity {
+
+public class ConsultaDietas_Fragment extends Fragment {
+
     RecyclerView rv_aliemntos;
     ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
     ArrayList<String> keysDietas =new ArrayList<String>();
@@ -45,10 +50,12 @@ public class Consulta_Dieta_Activity extends AppCompatActivity {
     TextView almuerzoResumen;
     Dieta dieta;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consulta_dietas);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view=inflater.inflate(R.layout.fragment_consulta_dietas_, container, false);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaDate= new Date();
         final String fechaHoy=dateFormat.format(fechaDate);
@@ -56,28 +63,16 @@ public class Consulta_Dieta_Activity extends AppCompatActivity {
 
 
 
-        fecha= (TextView) findViewById(R.id.textFecha);
-         meriendaResumen= (TextView) findViewById(R.id.meriendaResumen);
-         desayunoResumen= (TextView) findViewById(R.id.desayunoResumen);
-         almuerzoResumen= (TextView) findViewById(R.id.almuerzoResumen);
+        fecha= (TextView) view.findViewById(R.id.textFecha);
+        meriendaResumen= (TextView) view.findViewById(R.id.meriendaResumen);
+        desayunoResumen= (TextView) view.findViewById(R.id.desayunoResumen);
+        almuerzoResumen= (TextView) view.findViewById(R.id.almuerzoResumen);
 
 
         fecha.setText(fechaHoy);
 
         ;
-        cantidadDietas= (TextView) findViewById(R.id.textView8);
-        /*
-        rv_aliemntos=(RecyclerView) findViewById(R.id.rv_listas);
-        rv_aliemntos.setLayoutManager(new LinearLayoutManager(this));
-        sugerenciasAdaptador =new Sugerencias_Adaptador(alimentos);
-        rv_aliemntos.setAdapter(sugerenciasAdaptador);
-        rv_aliemntos.setHasFixedSize(true);
-        GridLayoutManager layoutManager=new GridLayoutManager(this,3);
-        rv_aliemntos.setLayoutManager(layoutManager);
-
-
-        */
-
+        cantidadDietas= (TextView) view.findViewById(R.id.textView8);
         tipoDietas.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -142,29 +137,29 @@ public class Consulta_Dieta_Activity extends AppCompatActivity {
 
                         String strResumen="";
                         if (resumen.containsKey("Desayuno")&&!resumen.get("Desayuno").isEmpty())
-                        for (Map.Entry<String, Integer> entry : resumen.get("Desayuno").entrySet()) {
-                            String key = entry.getKey();
-                            Integer value = entry.getValue();
-                            strResumen +=key+" "+value+"\n";
-                        }
+                            for (Map.Entry<String, Integer> entry : resumen.get("Desayuno").entrySet()) {
+                                String key = entry.getKey();
+                                Integer value = entry.getValue();
+                                strResumen +=key+" "+value+"\n";
+                            }
                         desayunoResumen.setText(strResumen);
 
                         strResumen="";
                         if (resumen.containsKey("Almuerzo")&&!resumen.get("Almuerzo").isEmpty())
-                        for (Map.Entry<String, Integer> entry : resumen.get("Almuerzo").entrySet()) {
-                            String key = entry.getKey();
-                            Integer value = entry.getValue();
-                            strResumen +=key+" "+value+"\n";
-                        }
+                            for (Map.Entry<String, Integer> entry : resumen.get("Almuerzo").entrySet()) {
+                                String key = entry.getKey();
+                                Integer value = entry.getValue();
+                                strResumen +=key+" "+value+"\n";
+                            }
                         almuerzoResumen.setText(strResumen);
 
                         strResumen="";
                         if (resumen.containsKey("Merienda")&&!resumen.get("Merienda").isEmpty())
-                        for (Map.Entry<String, Integer> entry : resumen.get("Merienda").entrySet()) {
-                            String key = entry.getKey();
-                            Integer value = entry.getValue();
-                            strResumen +=key+" "+value+"\n";
-                        }
+                            for (Map.Entry<String, Integer> entry : resumen.get("Merienda").entrySet()) {
+                                String key = entry.getKey();
+                                Integer value = entry.getValue();
+                                strResumen +=key+" "+value+"\n";
+                            }
                         meriendaResumen.setText(strResumen);
 
 
@@ -185,6 +180,6 @@ public class Consulta_Dieta_Activity extends AppCompatActivity {
 
             }
         });
-
+        return view;
     }
 }
