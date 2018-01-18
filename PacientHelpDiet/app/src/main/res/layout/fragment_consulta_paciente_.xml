@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="diet.help.pacient.pacienthelpdiet.Fragment.ConsultaPaciente_Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:text="Sala:"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Area:"
+            android:textAllCaps="true"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView3"
+            android:layout_margin="10dp">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_listas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="2dp" />
+        </android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>
+
+
+</FrameLayout>
