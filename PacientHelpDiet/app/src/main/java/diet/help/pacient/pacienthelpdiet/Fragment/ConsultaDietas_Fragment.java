@@ -32,7 +32,7 @@ import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 
 
 public class ConsultaDietas_Fragment extends Fragment {
-
+// cambio sin rama local
     RecyclerView rv_aliemntos;
     ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
     ArrayList<String> keysDietas =new ArrayList<String>();
