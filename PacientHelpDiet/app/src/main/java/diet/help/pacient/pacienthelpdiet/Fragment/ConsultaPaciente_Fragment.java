@@ -68,18 +68,15 @@ public class ConsultaPaciente_Fragment extends Fragment {
                     referencespaciente.child(hospitalizacion.getPacienteKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(DataSnapshot ds1:dataSnapshot.getChildren()){
-                                    Paciente pacient = new Paciente();
-                                    Log.i("datos","key"+ds1.child("nombre").getValue().toString());
-                                    pacient.setNombre(ds1.child("nombre").getValue().toString());
-                                    pacient.setApellido(ds1.child("apellido").getValue().toString());
-                                    pacient.setImg(ds1.child("img").getValue().toString());
-                                    pacientes.add(pacient);
-                                    hospitalizacion.setPacientes(pacientes);
-                                    hospitalizacions.add(hospitalizacion);
-                            }
+                            Log.i("datos",dataSnapshot.child("nombre").getValue().toString());
+                            Paciente pacient = new Paciente();
+                            pacient.setNombre(dataSnapshot.child("nombre").getValue().toString());
+                            pacient.setApellido(dataSnapshot.child("apellido").getValue().toString());
+                            pacient.setImg(dataSnapshot.child("img").getValue().toString());
+                            pacientes.add(pacient);
+                            hospitalizacion.setPacientes(pacientes);
+                            hospitalizacions.add(hospitalizacion);
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
