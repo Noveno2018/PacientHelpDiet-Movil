@@ -86,8 +86,7 @@
 
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="20dp"
-        app:cardElevation="9dp"
-        >
+        app:cardElevation="9dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

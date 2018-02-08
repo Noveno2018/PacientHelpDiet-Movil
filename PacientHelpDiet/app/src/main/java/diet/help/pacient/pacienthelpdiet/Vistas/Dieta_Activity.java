@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Sugerencias_Adaptador;
 import diet.help.pacient.pacienthelpdiet.Modelos.DetalleDieta;
 import diet.help.pacient.pacienthelpdiet.Modelos.Dieta;
+import diet.help.pacient.pacienthelpdiet.Modelos.Paciente;
 import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 import diet.help.pacient.pacienthelpdiet.Modelos.Sugerencias;
 import diet.help.pacient.pacienthelpdiet.Modelos.TipoDietas;
@@ -26,6 +27,7 @@ public class Dieta_Activity extends AppCompatActivity {
     RecyclerView rv_aliemntos;
     ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
     ArrayList<TipoDietas> tipos =new ArrayList<TipoDietas>();
+    ArrayList<Paciente> pacientes=new ArrayList<Paciente>();
     ArrayList<DetalleDieta> detalleDietas=new ArrayList<DetalleDieta>();
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     final DatabaseReference references=database.getReference(FirebaseReferences.ALIMENTOS_REFERENCIAS);
@@ -43,6 +45,7 @@ public class Dieta_Activity extends AppCompatActivity {
         rv_aliemntos.setHasFixedSize(true);
         GridLayoutManager layoutManager=new GridLayoutManager(this,3);
         rv_aliemntos.setLayoutManager(layoutManager);
+
         references.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -60,6 +63,49 @@ public class Dieta_Activity extends AppCompatActivity {
 
             }
         });
+
+        DatabaseReference referenciasconsulta=database.getReference(FirebaseReferences.DIETA_REFERENCIAS);
+
+        referenciasconsulta.orderByChild("fecha").equalTo("27/10/2017").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (final DataSnapshot ds1:dataSnapshot.getChildren()){
+                    Paciente pacientes1=new Paciente();
+                    pacientes1.setKey(ds1.child("pacient_key").getValue().toString());
+                    pacientes.add(pacientes1);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        for(int i=0;i<pacientes.size();i++){
+            DatabaseReference referencepaciente=database.getReference(FirebaseReferences.PACIENTE_REFERENCIAS+"/"+ pacientes.get(i).getKey());
+            referencepaciente.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot ds2:dataSnapshot.getChildren()){
+                        Paciente paciente=new Paciente();
+                        paciente.setCedula(ds2.child("cedula").getValue().toString());
+                        paciente.setNombre(ds2.child("nombre").getValue().toString());
+                        paciente.setApellido(ds2.child("apellido").getValue().toString());
+                        pacientes.add(paciente);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+
+
 
     }
 }
