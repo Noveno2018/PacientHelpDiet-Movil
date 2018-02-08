@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 
 import diet.help.pacient.pacienthelpdiet.Interface.OnSelectElementos;
+import diet.help.pacient.pacienthelpdiet.Modelos.Hospitalizacion;
 import diet.help.pacient.pacienthelpdiet.Modelos.Paciente;
 import diet.help.pacient.pacienthelpdiet.R;
 
@@ -23,11 +24,11 @@ import diet.help.pacient.pacienthelpdiet.R;
 
 public class Paciente_Adaptador extends RecyclerView.Adapter<Paciente_Adaptador.PacienteViewHolder>{
 
-    ArrayList<Paciente> paciente;
+    ArrayList<Hospitalizacion> hospitalizacions;
     private OnSelectElementos onSelectElementos;
 
-    public Paciente_Adaptador(ArrayList<Paciente> paciente) {
-        this.paciente = paciente;
+    public Paciente_Adaptador(ArrayList<Hospitalizacion> hospitalizacions) {
+        this.hospitalizacions = hospitalizacions;
     }
 
     public void setOnSelectElementos(OnSelectElementos onSelectElementos) {
@@ -42,14 +43,17 @@ public class Paciente_Adaptador extends RecyclerView.Adapter<Paciente_Adaptador.
 
     @Override
     public void onBindViewHolder(final Paciente_Adaptador.PacienteViewHolder holder, final int position) {
-        Paciente pacientes=paciente.get(position);
-        Glide.with(holder.itemView.getContext()).load(pacientes.getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img);
-        holder.nombre.setText(pacientes.getNombre());
+        Hospitalizacion pacientes=hospitalizacions.get(position);
+        for(int i=0;i<hospitalizacions.size();i++) {
+            Glide.with(holder.itemView.getContext()).load(pacientes.getPacientes().get(i).getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img);
+            holder.nombre.setText(pacientes.getPacientes().get(i).getNombre()+" "+pacientes.getPacientes().get(i).getApellido());
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return paciente.size();
+        return hospitalizacions.size();
     }
 
     public static class PacienteViewHolder extends RecyclerView.ViewHolder{
@@ -58,9 +62,9 @@ public class Paciente_Adaptador extends RecyclerView.Adapter<Paciente_Adaptador.
         CardView btn_add;
         public PacienteViewHolder(View itemView, final OnSelectElementos onSelectElementos) {
             super(itemView);
-            img=(ImageView) itemView.findViewById(R.id.iv_paciente);
-            nombre=(TextView) itemView.findViewById(R.id.tv_paciente);
-            btn_add=(CardView)itemView.findViewById(R.id.cv_add);
+            img=(ImageView) itemView.findViewById(R.id.ig_img);
+            nombre=(TextView) itemView.findViewById(R.id.tv_nombre_paciente);
+            btn_add=(CardView)itemView.findViewById(R.id.cv_send);
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
