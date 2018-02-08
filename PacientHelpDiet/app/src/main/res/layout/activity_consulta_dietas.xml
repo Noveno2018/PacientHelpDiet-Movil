@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="diet.help.pacient.pacienthelpdiet.Vistas.Dieta_Activity">
-
-
+    tools:context="diet.help.pacient.pacienthelpdiet.Vistas.Consulta_Dietas_Activity">
+    <TextView
+        android:id="@+id/textFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Dietas Para hoy: " />
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textFecha"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Dietas Para hoy: " />
+<!--
     <TextView
         android:id="@+id/textFecha"
         android:layout_width="match_parent"
@@ -16,13 +31,7 @@
         android:text="Alimentos"
         android:textAllCaps="true" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textFecha"
-        android:text="Dietas Para hoy: " />
+
 
     <TableLayout
         android:layout_width="match_parent"
@@ -99,6 +108,13 @@
 
 
     </TableLayout>
+    -->
 
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textView8"
+        android:layout_marginEnd="53dp" />
 </RelativeLayout>
