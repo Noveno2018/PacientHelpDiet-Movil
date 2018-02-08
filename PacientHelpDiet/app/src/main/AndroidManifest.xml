@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Pruebas" />
         <activity android:name=".Vistas.Dieta_Activity"></activity>
-        <activity android:name=".Vistas.Consulta_Dieta_Activity"></activity>
+        <activity android:name=".Vistas.Consulta_Dietas_Activity"></activity>
     </application>
 
 </manifest>
