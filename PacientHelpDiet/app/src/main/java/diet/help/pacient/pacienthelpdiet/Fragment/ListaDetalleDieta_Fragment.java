@@ -1,110 +1,176 @@
 package diet.help.pacient.pacienthelpdiet.Fragment;
 
-import android.content.Context;
-import android.net.Uri;
+import android.app.AlertDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import diet.help.pacient.pacienthelpdiet.Adaptadores.AdapterDetalleDieta;
+import diet.help.pacient.pacienthelpdiet.Modelos.DetalleDieta;
+import diet.help.pacient.pacienthelpdiet.Modelos.Dieta;
+import diet.help.pacient.pacienthelpdiet.Modelos.Paciente;
 import diet.help.pacient.pacienthelpdiet.R;
+import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ListaDetalleDieta_Fragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ListaDetalleDieta_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ListaDetalleDieta_Fragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView rv;
+    Spinner cmb_paciente;
+    int idpaciente;
+    EditText txtFechaDetalleLista, txtNombre, txtCedula;
+    Button btnBuscarDetalleLista,btnPasarDatosCatering;
+    ArrayList<Dieta> dietas;
+    ArrayList<DetalleDieta> detalles;
+    ArrayList<Paciente> pacientes;
+    AdapterDetalleDieta adapter;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    Date today= new Date();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference Dietarefercia=database.getReference(FirebaseReferences.DIETA_REFERENCIAS);
+    final DatabaseReference DetalleReference=database.getReference(FirebaseReferences.DETALLE_REFERENCIAS);
+    final DatabaseReference Preference=database.getReference(FirebaseReferences.PACIENTE_REFERENCIAS);
+    final String fechaHoy=dateFormat.format(today);
+    ArrayList<String> paciente=new ArrayList<String>();
+    String usuario="-L0ePqWn-zBqUUx8FTS8";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //
 
-    private OnFragmentInteractionListener mListener;
 
-    public ListaDetalleDieta_Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListaDetalleDieta_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListaDetalleDieta_Fragment newInstance(String param1, String param2) {
-        ListaDetalleDieta_Fragment fragment = new ListaDetalleDieta_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_detalle_dieta, container, false);
+        View vista = inflater.inflate(R.layout.fragment_lista_detalle_dieta, container, false);
+        rv = (RecyclerView) vista.findViewById(R.id.rvwDetalledieta);
+        txtCedula=(EditText) vista.findViewById(R.id.txtCedula);
+        cmb_paciente=(Spinner) vista.findViewById(R.id.sp_paciente);
+        btnPasarDatosCatering=(Button) vista.findViewById(R.id.btnPasarListaCatering);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        dietas=new ArrayList<>();
+        detalles=new ArrayList<>();
+        pacientes=new ArrayList<>();
+        adapter=new AdapterDetalleDieta(dietas);
+        rv.setAdapter(adapter);
+        new LlamarPacientes().execute();
+        cmb_paciente.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                idpaciente=i;
+                if(idpaciente!=0){
+                    txtCedula.setText("0123456");
+                    Dietarefercia.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            dietas.removeAll(dietas);
+                            for ( DataSnapshot ds:dataSnapshot.getChildren()){
+                                final Dieta dieta=ds.getValue(Dieta.class);
+                                dieta.setKey(ds.getKey());
+                                dietas.add(dieta);
+                                /*DetalleReference.orderByChild("dietaKey").equalTo(dieta.getKey()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot ds1:dataSnapshot.getChildren()){
+                                            DetalleDieta detalle= ds1.getValue(DetalleDieta.class);
+                                            detalle.setKey(ds1.getKey());
+                                            detalles.add(detalle);
+                                            dieta.setListadetalledieta(detalles);
+                                            dietas.add(dieta);
+                                        }
+                                        dieta.getListadetalledieta();
+                                    }
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                    }
+                                });*/
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(getContext(),"Seleccionar una opcion",Toast.LENGTH_SHORT).show();
+            }
+        });
+        return vista;
+    }
+    public void ShowDialogListView (View vista){
+        AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
+        builder.setCancelable(true);
+        builder.setPositiveButton("Aceptar",null);
+        builder.setView(rv);
+        AlertDialog dialog=builder.create();
+        dialog.setTitle("Detalle");
+        dialog.show();
+
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private void ListaPaciente(){
+        int i;
+        paciente.add("----Seleccione----");
+        Log.i("string3",String.valueOf(pacientes.size()));
+        for(i=0;i<pacientes.size();i++){
+            Log.i("string",pacientes.get(i).getNombre()+" "+pacientes.get(i).getApellido());
+            paciente.add(pacientes.get(i).getNombre()+" "+pacientes.get(i).getApellido());
         }
+        ArrayAdapter<String> spinnerAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, paciente);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cmb_paciente.setAdapter(spinnerAdapter);
+
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+    private class LlamarPacientes extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Preference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    pacientes.clear();
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        pacientes.add(new Paciente(ds.child("cedula").getValue().toString(),ds.child("nombre").getValue().toString(),ds.child("apellido").getValue().toString(),ds.getKey()));
+                    }
+                    ListaPaciente();
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+            Log.i("string1", String.valueOf(pacientes.size()));
+            return null;
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            ListaPaciente();
+        }
     }
 }
