@@ -5,7 +5,7 @@ package diet.help.pacient.pacienthelpdiet.Modelos;
  */
 
 public class Paciente {
-    String cedula,nombre,apellido,telefono,direccion, estadocivil,fechanacimiento,alergias,tiposangre,antecendentes,userKey,key;
+    String cedula,nombre,apellido,telefono,direccion, estadocivil,fechanacimiento,alergias,tiposangre,antecendentes,userKey,key,img;
 
     public Paciente() {
     }
@@ -44,6 +44,14 @@ public class Paciente {
         this.nombre = nombre;
         this.apellido = apellido;
         this.key = key;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getKey() {
