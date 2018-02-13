@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Consulta_Adaptador;
+import diet.help.pacient.pacienthelpdiet.Adaptadores.Consulta_Adaptador_Detalle;
 import diet.help.pacient.pacienthelpdiet.Adaptadores.Sugerencias_Adaptador;
 import diet.help.pacient.pacienthelpdiet.Modelos.Consulta;
 import diet.help.pacient.pacienthelpdiet.Modelos.DetalleDieta;
@@ -45,6 +48,12 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
     Sugerencias_Adaptador sugerenciasAdaptador;
     TextView fecha;
     TextView cantidadDietas;
+    TextView nombreDetalle;
+    TextView detalleDetalle;
+    LinearLayout myLinearLayout;
+    LinearLayout myLinearLayout2;
+    ImageView foto;
+    String [] resumenstr;
 
     Dieta dieta;
     ArrayList<Consulta>listaPersonajes;
@@ -53,11 +62,15 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta_dietas);
-
+        myLinearLayout =(LinearLayout)findViewById(R.id.myLinear);
+        myLinearLayout2 =(LinearLayout)findViewById(R.id.myLinear2);
+        foto=(ImageView)findViewById(R.id.idImagenDetalle);
+        nombreDetalle =(TextView)findViewById(R.id.idNombreDetalle) ;
+        detalleDetalle=(TextView)findViewById(R.id.idDetalleDetalle) ;
         listaPersonajes = new ArrayList<>();
         recyclerPersonajes = (RecyclerView) findViewById(R.id.RecyclerId);
         recyclerPersonajes.setLayoutManager(new LinearLayoutManager(this));
-
+        resumenstr = new String[5];
         //llenarPersonajesVo();
 
 
@@ -72,7 +85,7 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
 //        almuerzoResumen= (TextView) view.findViewById(R.id.almuerzoResumen);
 
 
-       fecha.setText(fechaHoy);
+       fecha.setText("Fecha hoy:"+ fechaHoy);
        cantidadDietas= (TextView) findViewById(R.id.textView8);
 
 
@@ -97,7 +110,7 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 int cantidad=0;
                 final HashMap<String, Dieta> catalogoDietas = new HashMap<String, Dieta>();
-                final HashMap<String, HashMap<String,Integer>> resumen = new HashMap<String, HashMap<String,Integer>>();
+                final HashMap<String, HashMap<String,String>> resumen = new HashMap<String, HashMap<String,String>>();
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Dieta ali=ds.getValue(Dieta.class);
@@ -108,7 +121,7 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
                         keysDietas.add(ds.getKey());
                         catalogoDietas.put(ds.getKey(),ali);
                         if (!resumen.containsKey(ali.getHorario())){
-                            HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+                            HashMap<String, String> hmap = new HashMap<String, String>();
                             resumen.put(ali.getHorario(),hmap);
                         }
                     }
@@ -125,11 +138,15 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
                             if(keysDietas.indexOf(det.getDietaKey())!=-1){
                                 String tipoDieta = catalogoTipoDietas.get(det.getTipodieta_key());
                                 String horarioDieta=catalogoDietas.get(det.getDietaKey()).getHorario();
+                                resumen.get(horarioDieta).put(det.getDietaKey()+";;"+tipoDieta,catalogoDietas.get(det.getDietaKey()).getObservaciones());
+
+                                /*
                                 if(!resumen.get(horarioDieta).containsKey(tipoDieta)){
                                     resumen.get(horarioDieta).put(tipoDieta,1);
                                 }else {
                                     resumen.get(horarioDieta).put(tipoDieta,resumen.get(horarioDieta).get(tipoDieta)+1);
                                 }
+                                */
                             }
                         }
 
@@ -137,44 +154,74 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
                         int cantidad_unitaria=0;
                         ArrayList<Consulta> listaDetalles = new ArrayList<>();
                         if (resumen.containsKey("Desayuno")&&!resumen.get("Desayuno").isEmpty())
-                            for (Map.Entry<String, Integer> entry : resumen.get("Desayuno").entrySet()) {
+                            for (Map.Entry<String, String> entry : resumen.get("Desayuno").entrySet()) {
                                 String key = entry.getKey();
-                                Integer value = entry.getValue();
-                                strResumen +=key+" "+value+"\n";
-                                listaDetalles.add(new Consulta(strResumen,"asds"));
+                                String tipoDieta=key.split(";;")[1];
+                                listaDetalles.add(new Consulta(tipoDieta,entry.getValue()));
                                 cantidad_unitaria++;
                             }
                         //desayunoResumen.setText(strResumen);
-                        listaPersonajes.add(new Consulta("Desayunos",String.valueOf(cantidad_unitaria),R.drawable.desayuno,listaDetalles));
+                        resumenstr[0]=String.valueOf(cantidad_unitaria)+" Desayunos para hoy";
+                        listaPersonajes.add(new Consulta("Desayunos",resumenstr[0],R.drawable.desayuno,listaDetalles));
 
                         strResumen="";
                         cantidad_unitaria=0;
                         listaDetalles = new ArrayList<>();
                         if (resumen.containsKey("Almuerzo")&&!resumen.get("Almuerzo").isEmpty())
-                            for (Map.Entry<String, Integer> entry : resumen.get("Almuerzo").entrySet()) {
+                            for (Map.Entry<String, String> entry : resumen.get("Almuerzo").entrySet()) {
                                 String key = entry.getKey();
-                                Integer value = entry.getValue();
-                                strResumen +=key+" "+value+"\n";
-                                listaDetalles.add(new Consulta(strResumen,"observaciones almuerzos"));
+                                String tipoDieta=key.split(";;")[1];
+                                listaDetalles.add(new Consulta(tipoDieta,entry.getValue()));
                                 cantidad_unitaria++;
                             }
                         //almuerzoResumen.setText(strResumen);
-                        listaPersonajes.add(new Consulta("Almuerzos",String.valueOf(cantidad_unitaria),R.drawable.almuerzos,listaDetalles));
+                        resumenstr[1]=String.valueOf(cantidad_unitaria)+" Almuerzos para hoy";
+                        listaPersonajes.add(new Consulta("Almuerzos",resumenstr[1],R.drawable.almuerzos,listaDetalles));
 
 
                         strResumen="";
                         cantidad_unitaria=0;
                         listaDetalles = new ArrayList<>();
                         if (resumen.containsKey("Merienda")&&!resumen.get("Merienda").isEmpty())
-                            for (Map.Entry<String, Integer> entry : resumen.get("Merienda").entrySet()) {
+                            for (Map.Entry<String, String> entry : resumen.get("Merienda").entrySet()) {
                                 String key = entry.getKey();
-                                Integer value = entry.getValue();
-                                strResumen +=key+" "+value+"\n";
+                                String tipoDieta=key.split(";;")[1];
+                                listaDetalles.add(new Consulta(tipoDieta,entry.getValue()));
                                 cantidad_unitaria++;
-                                listaDetalles.add(new Consulta(strResumen,"observaciones meriendas"));
                             }
                         //meriendaResumen.setText(strResumen);
-                        listaPersonajes.add(new Consulta("Meriendas",String.valueOf(cantidad_unitaria),R.drawable.meriendas,listaDetalles));
+                        resumenstr[2]=String.valueOf(cantidad_unitaria)+" Meriendas para hoy";
+                        listaPersonajes.add(new Consulta("Meriendas",resumenstr[2],R.drawable.meriendas,listaDetalles));
+
+                        cantidad_unitaria=0;
+                        listaDetalles = new ArrayList<>();
+                        if (resumen.containsKey("Colacion 1")&&!resumen.get("Colacion 1").isEmpty())
+                            for (Map.Entry<String, String> entry : resumen.get("Colacion 1").entrySet()) {
+                                String key = entry.getKey();
+                                String tipoDieta=key.split(";;")[1];
+                                listaDetalles.add(new Consulta(tipoDieta,entry.getValue()));
+                                cantidad_unitaria++;
+                            }
+                        //meriendaResumen.setText(strResumen);
+                        resumenstr[3]=String.valueOf(cantidad_unitaria)+" Colaciones 1 para hoy";
+                        listaPersonajes.add(new Consulta("Colacion 1",resumenstr[3],R.drawable.colacion1,listaDetalles));
+
+
+                        cantidad_unitaria=0;
+                        listaDetalles = new ArrayList<>();
+                        if (resumen.containsKey("Colacion 2")&&!resumen.get("Colacion 2").isEmpty())
+                            for (Map.Entry<String, String> entry : resumen.get("Colacion 2").entrySet()) {
+                                String key = entry.getKey();
+                                String tipoDieta=key.split(";;")[1];
+                                listaDetalles.add(new Consulta(tipoDieta,entry.getValue()));
+                                cantidad_unitaria++;
+                            }
+                        //meriendaResumen.setText(strResumen);
+                        resumenstr[4]=String.valueOf(cantidad_unitaria)+" Colaciones 2 para hoy";
+                        listaPersonajes.add(new Consulta("Colacion 2",resumenstr[4],R.drawable.colacion2,listaDetalles));
+
+
+
 
                         Consulta_Adaptador adapter=new Consulta_Adaptador(listaPersonajes);
                         recyclerPersonajes.setAdapter(adapter);
@@ -192,13 +239,50 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
                                     if (child != null ) {
 
                                         int position = recyclerView.getChildAdapterPosition(child);
-                                        cantidadDietas.setText("Desayunos");
+
+
+
 
                                         listaPersonajes= listaPersonajes.get(position).getListaDetalles();
                                         if (!listaPersonajes.isEmpty()){
-                                            Consulta_Adaptador adapter=new Consulta_Adaptador(listaPersonajes);
+                                            switch (position){
+                                                case 0:
+                                                    nombreDetalle.setText("Desayunos");
+                                                    detalleDetalle.setText(resumenstr[0]);
+                                                    foto.setImageResource(R.drawable.desayuno);
+                                                    cantidadDietas.setText("");
+                                                    break;
+                                                case 1:
+                                                    nombreDetalle.setText("Almuerzos");
+                                                    detalleDetalle.setText(resumenstr[1]);
+                                                    foto.setImageResource(R.drawable.almuerzos);
+                                                    cantidadDietas.setText("");
+                                                    break;
+                                                case 2:
+                                                    nombreDetalle.setText("Meriendas");
+                                                    detalleDetalle.setText(resumenstr[2]);
+                                                    foto.setImageResource(R.drawable.meriendas);
+                                                    cantidadDietas.setText("");
+                                                    break;
+                                                case 3:
+                                                    nombreDetalle.setText("Colacion 1");
+                                                    detalleDetalle.setText(resumenstr[3]);
+                                                    foto.setImageResource(R.drawable.colacion1);
+                                                    cantidadDietas.setText("");
+                                                    break;
+                                                case 4:
+                                                    nombreDetalle.setText("Colacion 2");
+                                                    detalleDetalle.setText(resumenstr[4]);
+                                                    foto.setImageResource(R.drawable.colacion2);
+                                                    cantidadDietas.setText("");
+                                                    break;
+                                            }
+                                            myLinearLayout2.setVisibility(View.VISIBLE);
+                                            myLinearLayout.setVisibility(View.VISIBLE);
+                                            Consulta_Adaptador_Detalle adapter=new Consulta_Adaptador_Detalle(listaPersonajes);
                                             recyclerPersonajes.setAdapter(adapter);
                                         }
+
 
 
 
@@ -238,5 +322,5 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
         });
     }
 
-   
+
 }

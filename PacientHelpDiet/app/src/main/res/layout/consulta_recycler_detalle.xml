@@ -6,49 +6,49 @@
 
 
     <LinearLayout
-        android:layout_width="362dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
 
-        <ImageView
-            android:id="@+id/idImagen"
-            android:layout_width="145dp"
-            android:layout_height="95dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/ic_launcher" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="152dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/idNombre"
+                android:id="@+id/tipo_dieta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text='Nombre'
+                android:text='Dieta'
                 android:textSize="25sp"
                 android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="226dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
             <TextView
                 android:id="@+id/idInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:text="Descripción " />
 
         </LinearLayout>
-
     </LinearLayout>
 
     <TextView
-        android:layout_width="362dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="11dp"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="11dp" />
 
 </LinearLayout>
