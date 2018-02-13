@@ -42,7 +42,7 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
     ArrayList<DetalleDieta> detalleDietas=new ArrayList<DetalleDieta>();
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     final DatabaseReference dietas=database.getReference(FirebaseReferences.DIETA_REFERENCIAS);
-    final DatabaseReference tipoDietas=database.getReference(FirebaseReferences.TIPODIETAS_REFERENCIAS);
+    final DatabaseReference tipoDietas=database.getReference(FirebaseReferences.TIPODIETAS_REFERENCIAS+"/"+alimentos.get(1).getKey());
     final DatabaseReference detalleDietasReference=database.getReference(FirebaseReferences.DETALLE_REFERENCIAS);
     final HashMap<String, String> catalogoTipoDietas = new HashMap<String, String>();
     Sugerencias_Adaptador sugerenciasAdaptador;
@@ -313,7 +313,6 @@ public class Consulta_Dietas_Activity extends AppCompatActivity  {
                 });
 
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

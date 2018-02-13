@@ -1,0 +1,332 @@
+{
+  "Alimentos" : {
+    "-L0JFKo6xcD3ekHxdlIh" : {
+      "img" : "https://firebasestorage.googleapis.com/v0/b/pacienthelpdiet-a07fb.appspot.com/o/agua.jpg?alt=media&token=59336f2a-a04a-4861-94e2-d552a9c05206",
+      "nombre" : "Agua"
+    },
+    "-L0JIQriRqCWqHlQKj3P" : {
+      "img" : "https://firebasestorage.googleapis.com/v0/b/pacienthelpdiet-a07fb.appspot.com/o/agua.jpg?alt=media&token=59336f2a-a04a-4861-94e2-d552a9c05206",
+      "nombre" : "Carne"
+    }
+  },
+  "detalleDieta" : {
+    "-L0FnPoEG9ZJJoRzPtYa" : {
+      "dietaKey" : "-L0FnPoDfx0Lq7rT72u0",
+      "especificaciones" : "evitar lacteos",
+      "tipodieta_key" : "-L0JFKHlGdGIYdQDla-e"
+    }
+  },
+  "detalleFacturacion" : [ {
+    "descripcion" : "2 sin lacteos",
+    "detalleDieta" : "blandas",
+    "facturacionKey" : "0",
+    "numeroPlatos" : "5"
+  } ],
+  "detalleHospitalizacion" : {
+    "-L0FnPoCkCOBhSq7tfZ0" : {
+      "area" : "Cirugia",
+      "descripcion" : "EL paciente padece una leve inflamacion en intestino grueso ",
+      "fecha" : "10/07/2010",
+      "hospitalizacionKey" : "-L0FnPoBFFBDeByGRV_r",
+      "prescripcion" : "paciente edéntulo con diabetes  ",
+      "sala" : "Cirugia 5"
+    }
+  },
+  "dieta" : {
+    "-L0FnPoDfx0Lq7rT72u0" : {
+      "fecha" : "10/10/1998",
+      "horario" : "Desayuno",
+      "observaciones" : "paciente  edentulo",
+      "pacienteKey" : "-L0FnPoBFFBDeByGRV_q"
+    },
+    "-L0JIQ3ya78wjTiMLMZm" : {
+      "fecha" : "10/10/1998",
+      "horario" : "Desayuno",
+      "observaciones" : "paciente  edentulo",
+      "pacienteKey" : "-L0JIQ3pk4eICL9t99wa"
+    }
+  },
+  "facturacion" : [ {
+    "fecha" : "11/10/2017",
+    "hora" : "15:00",
+    "observaciones" : "platos adicionales",
+    "usersKey" : "L0fnPoEG9ZJJoRzPtYb"
+  } ],
+  "hospitalizacion" : {
+    "-L0FnPoBFFBDeByGRV_r" : {
+      "fechaIngreso" : "11/11/2017",
+      "motivoIngreso" : "Apendicitis",
+      "numeroCama" : "4",
+      "observaciones" : "sufre una leve lecion en el estomago",
+      "pacienteKey" : "-L0FnPoASH6N283rjCBj",
+      "usersKey" : "L0fnPoEG9ZJJoRzPtYb"
+    }
+  },
+  "paciente" : {
+    "-L0FnPoASH6N283rjCBj" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-",
+      "usersKey" : "L0fnPoEG9ZJJoRzPtYb"
+    },
+    "-L0FnPzG8jGfkgLaVFG6" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0HVXUyZTcigOEoCEh8" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0HYMyM8Zmn0Qen_N2k" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0IPB_DpTXpHvE7JTTW" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0IPqKza4kSOFPR2zph" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0IRisKTUuJsGv_KDJy" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0JFKHzaGPTnDdHQAjW" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0JG6Taz9XoAZXACYS8" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0JGvdNyUXh9RPiU9gC" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0JHFLam-8MW-VpRGnI" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    },
+    "-L0JIQ3jMhq8qBlESPUF" : {
+      "alergias" : "quiwi",
+      "antecendentes" : "Hipertencion",
+      "apellido" : "Villa",
+      "cedula" : "0123456",
+      "direccion" : "Bosque",
+      "estadocivil" : "Soltero",
+      "fechanacimiento" : "12/02/1991",
+      "nombre" : "Alex",
+      "telefono" : "0235",
+      "tiposangre" : "AB-"
+    }
+  },
+  "tipoDieta" : {
+    "-L0JFKHlGdGIYdQDla-e" : {
+      "descripcion" : "Solo se puede el consumo de liquidos nada solidos",
+      "tipo" : "Liquidas"
+    },
+    "-L0JIQ3XDYeXyqA3-U5R" : {
+      "descripcion" : "Solo se puede el consumo de liquidos nada solidos",
+      "tipo" : "basal"
+    }
+  },
+  "users" : {
+    "-L0FnPoEG9ZJJoRzPtYb" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0FnPz_TsgienqnNru5" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0HVXVFx5P1bpnqZLrc" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0HYMyjmS_7Bz5-J8ci" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0IPB_Yk_Lh5OFIuVZi" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0IPqLIrs8CBvdzN8CE" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0IRiscKL6umJqM3hOl" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0JFKIIbgYTN5xUERG5" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0JG6TuJC4XckxodHmb" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0JGvdgrVGWtKqm5wW1" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0JHFLgHU4DqCN2LXBr" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    },
+    "-L0JIQ4345AFUnzknhjv" : {
+      "apellidos" : "Tobas",
+      "cedula" : "012345",
+      "direccion" : "Bosque",
+      "nombre" : "Alex",
+      "rol" : "1",
+      "telefono" : "014524",
+      "userKey" : "YO1M0ZWFWMfTFCv0hX4BsjBSZU62"
+    }
+  }
+}
