@@ -24,11 +24,11 @@ import diet.help.pacient.pacienthelpdiet.R;
 
 public class Paciente_Adaptador extends RecyclerView.Adapter<Paciente_Adaptador.PacienteViewHolder>{
 
-    ArrayList<Hospitalizacion> hospitalizacions;
+    ArrayList<Paciente> pacientes;
     private OnSelectElementos onSelectElementos;
 
-    public Paciente_Adaptador(ArrayList<Hospitalizacion> hospitalizacions) {
-        this.hospitalizacions = hospitalizacions;
+    public Paciente_Adaptador(ArrayList<Paciente> pacientes) {
+        this.pacientes = pacientes;
     }
 
     public void setOnSelectElementos(OnSelectElementos onSelectElementos) {
@@ -43,27 +43,26 @@ public class Paciente_Adaptador extends RecyclerView.Adapter<Paciente_Adaptador.
 
     @Override
     public void onBindViewHolder(final Paciente_Adaptador.PacienteViewHolder holder, final int position) {
-        Hospitalizacion pacientes=hospitalizacions.get(position);
-        for(int i=0;i<hospitalizacions.size();i++) {
-            Glide.with(holder.itemView.getContext()).load(pacientes.getPacientes().get(i).getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img);
-            holder.nombre.setText(pacientes.getPacientes().get(i).getNombre()+" "+pacientes.getPacientes().get(i).getApellido());
-        }
-
+        Paciente paciente=pacientes.get(position);
+        Glide.with(holder.itemView.getContext()).load(paciente.getImg()).centerCrop().crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img);
+        holder.nombre.setText(paciente.getNombre()+" "+paciente.getApellido());
+        holder.antecedentes.setText(paciente.getAntecendentes());
     }
 
     @Override
     public int getItemCount() {
-        return hospitalizacions.size();
+        return pacientes.size();
     }
 
     public static class PacienteViewHolder extends RecyclerView.ViewHolder{
         ImageView img;
-        TextView nombre;
+        TextView nombre,antecedentes;
         CardView btn_add;
         public PacienteViewHolder(View itemView, final OnSelectElementos onSelectElementos) {
             super(itemView);
             img=(ImageView) itemView.findViewById(R.id.ig_img);
             nombre=(TextView) itemView.findViewById(R.id.tv_nombre_paciente);
+            antecedentes=(TextView) itemView.findViewById(R.id.tv_descripcion);
             btn_add=(CardView)itemView.findViewById(R.id.cv_send);
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -20,11 +20,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-<<<<<<< Updated upstream
-=======
-import diet.help.pacient.pacienthelpdiet.Fragment.ConsultaDietas_Fragment;
 import diet.help.pacient.pacienthelpdiet.Fragment.ConsultaPaciente_Fragment;
->>>>>>> Stashed changes
+
 import diet.help.pacient.pacienthelpdiet.Fragment.ContenedorDietas_Fragment;
 import diet.help.pacient.pacienthelpdiet.R;
 
@@ -119,7 +116,7 @@ public class PanelNavegacion extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_dietas) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new ContenedorDietas_Fragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new ConsultaPaciente_Fragment()).commit();
         } else if (id == R.id.nav_slideshow) {
 
 
@@ -131,7 +128,7 @@ public class PanelNavegacion extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_send) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new ConsultaPaciente_Fragment()).commit();
+
         } else if(id==R.id.nav_cerrar){
             FirebaseAuth.getInstance().signOut();
         }

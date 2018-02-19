@@ -46,6 +46,14 @@ public class Paciente {
         this.key = key;
     }
 
+    public Paciente(String nombre, String apellido, String antecendentes, String key, String img) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.antecendentes = antecendentes;
+        this.key = key;
+        this.img = img;
+    }
+
     public String getImg() {
         return img;
     }
