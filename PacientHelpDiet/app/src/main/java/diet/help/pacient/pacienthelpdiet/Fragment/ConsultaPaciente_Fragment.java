@@ -1,9 +1,11 @@
 package diet.help.pacient.pacienthelpdiet.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,57 +40,46 @@ public class ConsultaPaciente_Fragment extends Fragment {
 
     Paciente_Adaptador pacienteAdaptador;
     ArrayList<Paciente> pacientes=new ArrayList<Paciente>();
-    ArrayList<Hospitalizacion> hospitalizacions=new ArrayList<Hospitalizacion>();
     private EventBus eventBus=EventBus.getDefault();
     RecyclerView rv_pacientes;
-    Hospitalizacion hospitalizacion=new Hospitalizacion();
-
-
+    Paciente paciente;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_consulta_paciente_, container, false);
         rv_pacientes=(RecyclerView) view.findViewById(R.id.rv_listas);
-        pacienteAdaptador =new Paciente_Adaptador(hospitalizacions);
+        pacienteAdaptador =new Paciente_Adaptador(pacientes);
         rv_pacientes.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_pacientes.setAdapter(pacienteAdaptador);
         final FirebaseDatabase database=FirebaseDatabase.getInstance();
         final DatabaseReference referenceshospitalizacion=database.getReference(FirebaseReferences.HOSPITALIZACION_REFERENCIAS);
         final DatabaseReference referencespaciente=database.getReference(FirebaseReferences.PACIENTE_REFERENCIAS);
-        referenceshospitalizacion.addValueEventListener(new ValueEventListener() {
+        referencespaciente.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                hospitalizacions.removeAll(hospitalizacions);
+                pacientes.removeAll(pacientes);
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    Log.i("datos",ds.getKey().toString()+" "+ds.child("pacienteKey").getValue().toString()+" "+ds.child("motivoIngreso").getValue().toString()+" "+ds.child("observaciones").getValue().toString());
-                    hospitalizacion.setKey(ds.getKey().toString());
-                    hospitalizacion.setPacienteKey(ds.child("pacienteKey").getValue().toString());
-                    hospitalizacion.setMotivoIngreso(ds.child("motivoIngreso").getValue().toString());
-                    hospitalizacion.setObservaciones(ds.child("observaciones").getValue().toString());
-                    Log.i("datos","key"+referencespaciente.child(hospitalizacion.getPacienteKey()));
-                    referencespaciente.child(hospitalizacion.getPacienteKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Log.i("datos",dataSnapshot.child("nombre").getValue().toString());
-                            Paciente pacient = new Paciente();
-                            pacient.setNombre(dataSnapshot.child("nombre").getValue().toString());
-                            pacient.setApellido(dataSnapshot.child("apellido").getValue().toString());
-                            pacient.setImg(dataSnapshot.child("img").getValue().toString());
-                            pacientes.add(pacient);
-                            hospitalizacion.setPacientes(pacientes);
-                            hospitalizacions.add(hospitalizacion);
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+                    paciente=new Paciente();
+                    paciente.setKey(ds.getKey().toString());
+                    paciente.setNombre(ds.child("nombre").getValue().toString());
+                    paciente.setApellido(ds.child("apellido").getValue().toString());
+                    paciente.setImg(ds.child("img").getValue().toString());
+                    paciente.setAntecendentes(ds.child("antecendentes").getValue().toString());
+                    pacientes.add(paciente);
                 }
                 pacienteAdaptador.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        pacienteAdaptador.setOnSelectElementos(new OnSelectElementos() {
+            @Override
+            public void onAddClick(int posicion) {
+                Paciente p =new Paciente(pacientes.get(posicion).getNombre(),pacientes.get(posicion).getApellido(),pacientes.get(posicion).getAntecendentes(),pacientes.get(posicion).getKey(),pacientes.get(posicion).getImg());
+                FragmentManager fragmentManager=getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contenedor,new ContenedorDietas_Fragment(p)).commit();
             }
         });
         return view;

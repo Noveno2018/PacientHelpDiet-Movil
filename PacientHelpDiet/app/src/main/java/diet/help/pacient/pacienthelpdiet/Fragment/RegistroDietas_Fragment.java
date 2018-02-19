@@ -1,5 +1,6 @@
 package diet.help.pacient.pacienthelpdiet.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,12 +42,12 @@ import diet.help.pacient.pacienthelpdiet.Modelos.TipoDietas;
 import diet.help.pacient.pacienthelpdiet.R;
 import diet.help.pacient.pacienthelpdiet.Servicios.FirebaseReferences;
 
-public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class RegistroDietas_Fragment extends Fragment {
 
-    Spinner cmb_paciente,cmb_horario,cmb_tipodieta;
+    Spinner cmb_horario,cmb_tipodieta;
     ArrayList<Sugerencias> alimentos=new ArrayList<Sugerencias>();
-    ArrayList<Paciente> pacientes=new ArrayList<Paciente>();
     ArrayList<TipoDietas> tipoDieta=new ArrayList<TipoDietas>();
+    Paciente pacient;
     RecyclerView rv_pedidos;
     CardView btn_enviar;
     Dieta dieta;
@@ -57,10 +58,17 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
     final DatabaseReference references=database.getReference(FirebaseReferences.PACIENTE_REFERENCIAS);
     final DatabaseReference Tiporeferences=database.getReference(FirebaseReferences.TIPODIETAS_REFERENCIAS);
     final DatabaseReference dietareferences=database.getReference(FirebaseReferences.DIETA_REFERENCIAS);
-    private int posicion;
     private int posiciontipo;
     private String horarios;
     String [] itemshorario;
+
+    public RegistroDietas_Fragment() {
+    }
+
+    @SuppressLint("ValidFragment")
+    public RegistroDietas_Fragment(Paciente pacient) {
+        this.pacient = pacient;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +76,6 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_registro_dietas_, container, false);
         rv_pedidos=(RecyclerView)view.findViewById(R.id.rv_detalle);
-        cmb_paciente=(Spinner)view.findViewById(R.id.sp_pacientes);
         cmb_horario=(Spinner)view.findViewById(R.id.sp_horario);
         cmb_tipodieta=(Spinner)view.findViewById(R.id.sp_tipo);
         txt_Observaciones=(EditText)view.findViewById(R.id.et_observaciones);
@@ -86,8 +93,6 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
                 pedidos_adaptador.notifyDataSetChanged();
             }
         });
-        cmb_paciente.setOnItemSelectedListener(this);
-        new GetPacientes().execute();
         itemshorario=getResources().getStringArray(R.array.cmb_horarios);
         ArrayAdapter<String>adapterhorario=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,itemshorario);
         adapterhorario.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -119,7 +124,7 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(posicion!=0 && posiciontipo!=0 && horarios!="---Seleccione---") {
+                if(posiciontipo!=0 && horarios!="---Seleccione---") {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String fecha=dateFormat.format(new Date());;
                     dieta=new Dieta();
@@ -135,7 +140,7 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
                     if(!txt_Observaciones.getText().toString().isEmpty()){
                         observaciones=txt_Observaciones.getText().toString().trim();
                     }
-                    Dieta dieta1=new Dieta(dieta.getHorario(),pacientes.get(posicion-1).getKey(),observaciones,dieta.getFecha());
+                    Dieta dieta1=new Dieta(dieta.getHorario(),pacient.getKey(),observaciones,dieta.getFecha());
                     DatabaseReference dietasreferences=database.getReference(FirebaseReferences.DIETA_REFERENCIAS+"/"+dieta.getKey());
                     DatabaseReference detallereference=database.getReference(FirebaseReferences.DETALLE_REFERENCIAS);
                     for (int i=0;i<alimentos.size();i++){
@@ -158,9 +163,6 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
                         Toast.makeText(getContext(),"Porfavor Agregar Sugerencias",Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    if(posicion==0){
-                        Toast.makeText(getContext(),"Selecione un paciente",Toast.LENGTH_SHORT).show();
-                    }
                     if(posiciontipo==0){
                         Toast.makeText(getContext(),"Selecione un tipo de dieta",Toast.LENGTH_SHORT).show();
                     }
@@ -190,23 +192,9 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
         pedidos_adaptador.notifyDataSetChanged();
     }
 
-    private void ListadoPacientes(){
-        ArrayList<String> paciente=new ArrayList<String>();
-        paciente.add("----Seleccione----");
-        Log.i("string3",String.valueOf(pacientes.size()));
-        for(int i=0;i<pacientes.size();i++){
-            Log.i("string",pacientes.get(i).getNombre()+" "+pacientes.get(i).getApellido());
-            paciente.add(pacientes.get(i).getNombre()+" "+pacientes.get(i).getApellido());
-        }
-        ArrayAdapter<String> spinnerAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, paciente);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cmb_paciente.setAdapter(spinnerAdapter);
-    }
-
     private void ListadoTipoDietas(){
         ArrayList<String> tipodieta=new ArrayList<String>();
         tipodieta.add("----Seleccione----");
-        Log.i("string3",String.valueOf(pacientes.size()));
         for(int i=0;i<tipoDieta.size();i++){
             Log.i("string",tipoDieta.get(i).getTipo()+" "+tipoDieta.get(i).getDescripcion());
             tipodieta.add(tipoDieta.get(i).getTipo());
@@ -216,47 +204,7 @@ public class RegistroDietas_Fragment extends Fragment implements AdapterView.OnI
         cmb_tipodieta.setAdapter(spinnerAdapter);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-           posicion=position;
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    private class GetPacientes extends AsyncTask<Void,Void,Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            references.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    pacientes.clear();
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        pacientes.add(new Paciente(ds.child("cedula").getValue().toString(),ds.child("nombre").getValue().toString(),ds.child("apellido").getValue().toString(),ds.getKey()));
-                    }
-                    ListadoPacientes();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-            Log.i("string1", String.valueOf(pacientes.size()));
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            ListadoPacientes();
-        }
-
-    }
 
     private class GetTipoDieta extends AsyncTask<Void,Void,Void> {
 
