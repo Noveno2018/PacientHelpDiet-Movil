@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import diet.help.pacient.pacienthelpdiet.Fragment.ConsultaPaciente_Fragment;
 
 import diet.help.pacient.pacienthelpdiet.Fragment.ContenedorDietas_Fragment;
+import diet.help.pacient.pacienthelpdiet.Fragment.HistorialDietas_Fragment;
+import diet.help.pacient.pacienthelpdiet.Fragment.ListaDetalleDieta_Fragment;
 import diet.help.pacient.pacienthelpdiet.R;
 
 public class PanelNavegacion extends AppCompatActivity
@@ -118,10 +120,10 @@ public class PanelNavegacion extends AppCompatActivity
         } else if (id == R.id.nav_dietas) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new ConsultaPaciente_Fragment()).commit();
         } else if (id == R.id.nav_slideshow) {
-
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new HistorialDietas_Fragment()).commit();
 
         } else if (id == R.id.nav_manage) {
-
+            fragmentManager.beginTransaction().replace(R.id.contenedor,new ListaDetalleDieta_Fragment()).commit();
 
         } else if (id == R.id.nav_dietas_consulta) {
             Intent intent=new Intent(getApplicationContext(),Consulta_Dietas_Activity.class);
